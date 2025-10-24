@@ -4,30 +4,11 @@ services:
     ports:
       - "5678:5678"
     environment:
-      - N8N_LICENSE_ACTIVATION_KEY=enterprise-poc-key
-      - N8N_LICENSE_TENANT_ID=enterprise-poc
-      - N8N_LICENSE_SERVER_URL=http://localhost
-      - N8N_LICENSE_OFFLINE_MODE=true
-
-      # --- IMPORTANT URL SETTINGS ---
-      # Public hostname (no protocol, no trailing slash)
       - N8N_HOST=n8n-production-8fb1.up.railway.app
-      # Internal app port (container listens on 5678)
-      - N8N_PORT=5678
-      # External protocol used by users/webhooks
       - N8N_PROTOCOL=https
-      # Editor (UI) URL as seen in the browser (no trailing slash)
+      - N8N_PORT=443
       - N8N_EDITOR_BASE_URL=https://n8n-production-8fb1.up.railway.app
-      # Base used to generate webhook URLs (no trailing slash)
       - WEBHOOK_URL=https://n8n-production-8fb1.up.railway.app
-
-      # Optional but recommended when behind HTTPS
       - N8N_SECURE_COOKIE=true
-      - N8N_ENDPOINT_WEBHOOK=webhook
-      - N8N_ENDPOINT_WEBHOOK_TEST=webhook-test
-      - N8N_DIAGNOSTICS_ENABLED=false
-      - GENERIC_TIMEZONE=Asia/Kolkata
     volumes:
       - ~/.n8n:/home/node/.n8n
-
-
