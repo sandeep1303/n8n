@@ -4,17 +4,16 @@ services:
     ports:
       - "5678:5678"
     environment:
-		- N8N_ENFORCE_SETTINGS_FILE_PERMISSIONS=true
-      	- N8N_HOST=n8n-production-8fb1.up.railway.app
+	   	- N8N_HOST=n8n-production-8fb1.up.railway.app
       	- N8N_PROTOCOL=https
      	- N8N_PORT=5678
-		- N8N_RUNNERS_ENABLED=true
-      	- NODE_ENV=production
+		- NODE_ENV=production
       	- N8N_EDITOR_BASE_URL=https://n8n-production-8fb1.up.railway.app/
       	- WEBHOOK_URL=https://n8n-production-8fb1.up.railway.app
       	- N8N_SECURE_COOKIE=true
        volumes:
       - ~/.n8n:/home/node/.n8n
+
 
 
 
