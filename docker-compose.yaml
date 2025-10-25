@@ -1,19 +1,23 @@
 services:
   n8n:
-    image: n8n/n8n:latest
+    image: n8nio/n8n
+    container_name: n8n
+    restart: unless-stopped
     ports:
       - "5678:5678"
     environment:
-	   	- N8N_HOST=n8n-production-8fb1.up.railway.app
-      	- N8N_PROTOCOL=https
-     	- N8N_PORT=5678
-		- NODE_ENV=production
-      	- N8N_EDITOR_BASE_URL=https://n8n-production-8fb1.up.railway.app/
-      	- WEBHOOK_URL=https://n8n-production-8fb1.up.railway.app
-      	- N8N_SECURE_COOKIE=true
-       volumes:
-      - ~/.n8n:/home/node/.n8n
+      # Essential webhook configuration
+      - WEBHOOK_URL=https://n8n-production-8fb1.up.railway.app
+      - WEBHOOK_TUNNEL_URL=https://n8n-production-8fb1.up.railway.app
+      
+      # Additional recommended settings
+      - N8N_PROTOCOL=https
+      - N8N_HOST=n8n-production-8fb1.up.railway.app
+      - N8N_PORT=5678
+      - N8N_EDITOR_BASE_URL=https://n8n-production-8fb1.up.railway.app
+      
+    volumes:
+      - n8n_data:/home/node/.n8n
 
-
-
-
+volumes:
+  n8n_data:
