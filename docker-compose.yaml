@@ -1,33 +1,19 @@
 services:
-  db:
-    image: postgres:14
-    environment:
-      - POSTGRES_USER=n8n
-      - POSTGRES_PASSWORD=n8npass
-      - POSTGRES_DB=n8n
-    volumes:
-      - postgres_data:/var/lib/postgresql/data
-
   n8n:
-    image: n8nio/n8n
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: my-n8n-osint:latest
     ports:
       - "5678:5678"
     environment:
-      - DB_TYPE=postgresdb
-      - DB_POSTGRESDB_HOST=db
-      - DB_POSTGRESDB_DATABASE=n8n
-      - DB_POSTGRESDB_USER=n8n
-      - DB_POSTGRESDB_PASSWORD=n8npass
-      - N8N_BASIC_AUTH_ACTIVE=true
-      - N8N_BASIC_AUTH_USER=admin
-      - N8N_BASIC_AUTH_PASSWORD=strongpass
-      - N8N_HOST=n8n.yourdomain.com
-      - WEBHOOK_TUNNEL_URL=https://n8n-production-8fb1.up.railway.app
-    depends_on:
-      - db
-    volumes:
-      - n8n_data:/home/node/.n8n
-
-volumes:
-  postgres_data:
-  n8n_data:
+      - N8N_LICENSE_ACTIVATION_KEY=enterprise-poc-key
+      - N8N_LICENSE_TENANT_ID=enterprise-poc
+      - N8N_LICENSE_SERVER_URL=http://localhost
+      - N8N_LICENSE_OFFLINE_MODE=true
+      - N8N_DIAGNOSTICS_ENABLED=false
+      - N8N_VERSION_NOTIFICATIONS_ENABLED=false
+      - N8N_ONBOARDING_FLOW_DISABLED=true
+	- N8N_EXTERNAL_URL=https://n8n-production-8fb1.up.railway.app/
+	- WEBHOOK_URL=https://n8n-production-8fb1.up.railway.app/
+	- N8N_PROTOCOL=https"
