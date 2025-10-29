@@ -3,7 +3,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    image: my-n8n-osint:latest
+    image: n8n:latest
     ports:
       - "5678:5678"
     environment:
@@ -11,8 +11,4 @@ services:
       - N8N_LICENSE_TENANT_ID=enterprise-poc
       - N8N_LICENSE_SERVER_URL=http://localhost
       - N8N_LICENSE_OFFLINE_MODE=true
-      - N8N_DIAGNOSTICS_ENABLED=false
-      - N8N_VERSION_NOTIFICATIONS_ENABLED=false
-      - N8N_ONBOARDING_FLOW_DISABLED=true
-      - WEBHOOK_URL
-
+	- N8N_BASE_URL=https://n8n-production-8fb1.up.railway.app
